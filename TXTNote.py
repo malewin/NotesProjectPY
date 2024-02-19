@@ -5,7 +5,7 @@ from TheNote import TheNote
 class TXTNote(TheNote):
 
     def toString(self):
-        return "Название: " + str(self.name) + "; Текст: " + str(self.msg) + "; Автор: " + str(self.author) + "; Время создания: " + str(self.timeOfCreate)
+        return str(self.name) + "," + str(self.msg) + "," + str(self.author) + "," + str(self.timeOfCreate)
     
 
     def __new__(self, *args, **kwargs):

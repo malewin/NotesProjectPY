@@ -11,16 +11,17 @@ class FileWorking:
                 data.write(self)
 
     def saving(fileSourse, notes):
-        with open(fileSourse, 'w') as file:
+        with open(fileSourse, 'w+') as file:
             for note in notes:
-                file.write(f"{note['Название']},{note['Текст']},{note['Автор']},{note['Дава создания']}\n")
+                file.write(f"{note['Название']},{note['Текст']},{note['Автор']},{note['Дата создания']}\n")
     
     def detecting(fileSourse):
         notes = []
         if os.path.exists(fileSourse):
             with open(fileSourse, 'r') as file:
                 for line in file:
-                    data = line.strip().split(';')
+                    try: data = line.strip().split(',')
+                    finally: print(data)
                     notes.append({'Название': data[0], 'Текст': data[1], 'Автор': data[2], 'Дата создания': data[3]})
         return notes
     

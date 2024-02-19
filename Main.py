@@ -1,6 +1,6 @@
 import Notes
 from Notes import Notes
-import FileInit
+
 
 status = True
 
@@ -15,6 +15,8 @@ while (status):
     print("      5 - Показать список заметок")
     print("      6 - Выйти из приложения")
     print("____________________________")
+
+    
 
     currentInput = input("Введите номер пункта меню: ")
     if (currentInput == "1"):
