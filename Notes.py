@@ -25,6 +25,7 @@ class Notes(Organizer):
         temp = (TXTNote.toString(currentNote)).split(",")
         print(temp)
         FileInit.FileWorking.adding(Notes.notes, temp[0], temp[1], temp[2], temp[3])
+        # FileInit.FileWorking.saving(FileInit.FileWorking.path, Notes.notes)
         print (Notes.notes)
         print(f"Заметка {name} успешно создана!")
 
@@ -33,9 +34,10 @@ class Notes(Organizer):
         # currentNote = Notes.createdBuffer.pop()
         # dict = Notes.savedDict.update({f"{name}": currentNote})
         # FileInit.FileWorking.save(currentNote)
-        FileInit.FileWorking.save((Notes.toString(Notes.notes)))
-        # FileInit.FileWorking.saving(FileInit.FileWorking.path, notes=Notes.notes)
-        print(f"\nЗаметка {Notes.notes['Название']} была успешно сохранена!")
+        # FileInit.FileWorking.save(f"'Название' : " + "'" + {Notes.notes['Название']} + "'" + "'Текст' : " + "'" + {Notes.notes['Текст']} + "'" + "'Автор' : " + "'" + {Notes.notes['Автор']} + "'" + "'" + "'Дата создания' : " + "'" + {Notes.notes['Дата создания']} + "'")
+        # FileInit.FileWorking.save(Notes.notes['Название'] + Notes.notes['Текст'] + Notes.notes['Автор'] + Notes.notes['Дата создания'])
+        FileInit.FileWorking.saving(FileInit.FileWorking.path, Notes.notes)
+        print(f"\nЗаметка {Notes.notes[-1]} была успешно сохранена!")
 
     def editNote(): 
         name=input("\nРедактировать заметку (введите название): ")
@@ -47,7 +49,7 @@ class Notes(Organizer):
 
     def deleteNote():
         name=input("Удалить заметку (введите название): ")
-        Notes.savedDict.pop(name)
+        # Notes.savedDict.pop(name)
         FileInit.FileWorking.deleting(Notes.notes, name)
         print(f"\nЗаметка {name} успешно удалена!")
 
