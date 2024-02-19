@@ -13,7 +13,10 @@ class FileWorking:
     def saving(fileSourse, notes):
         with open(fileSourse, 'w+') as file:
             for note in notes:
-                file.write(f"'Название' : {note['Название']}, 'Текст' : {note['Текст']}, 'Автор' : {note['Автор']}, 'Дата создания' : {note['Дата создания']}\n")
+                temp = str(note.keys())
+                if temp == "dict_keys(['Название', 'Текст', 'Автор', 'Дата создания'])":
+                    pass
+                else : file.write(f"'Название' : {note['Название']}, 'Текст' : {note['Текст']}, 'Автор' : {note['Автор']}, 'Дата создания' : {note['Дата создания']}\n")
     
     def detecting(fileSourse):
         notes = []
@@ -38,11 +41,19 @@ class FileWorking:
                 print(f"{note['Название']},{note['Текст']},{note['Автор']},{note['Дата создания']}")
         else: print(f"Файл не найден или еще не создан")
 
-    def editing(notes, name, msg, author):
+    def editing(notes):
+        name = input("Введите название заметки, которую хотите отредактировать: ")
+        editedMsg = input("Текст: ")
+        newAuthor = input("Автор: ")
         for note in notes:
             if note['Название'].lower() == name.lower():
-                note['Текст'] = msg
-                note['Автор'] = author
+                note['Текст'] = editedMsg
+                note['Автор'] = newAuthor
                 note['Дата создания'] = datetime.datetime.now()
+                print(note)
+            else: 
+                print("Такой заметки нет")
+                break
+
 
     

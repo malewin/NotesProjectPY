@@ -27,7 +27,7 @@ while (status):
         Notes.saveNote()
     elif (currentInput == "3"):
         print("---> 3")
-        Notes.editNote()
+        Notes.editNote(Notes.notes)
     elif (currentInput == "4"):
         print("---> 4")
         Notes.deleteNote()

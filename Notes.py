@@ -39,23 +39,26 @@ class Notes(Organizer):
         FileInit.FileWorking.saving(FileInit.FileWorking.path, Notes.notes)
         print(f"\nЗаметка {Notes.notes[-1]} была успешно сохранена!")
 
-    def editNote(): 
-        name=input("\nРедактировать заметку (введите название): ")
-        temp = Notes.savedDict.get(name)
-        print(temp)
-        Notes.savedDict.pop(name)
-        Notes.savedDict.update({f'{name}': input("\nВведите новый текст заметки: ")})
-        print(f"\nЗаметка успешно отредактирована!")
+    def editNote(notes): 
+        # name=input("\nРедактировать заметку (введите название): ")
+        # temp = Notes.savedDict.get(name)
+        # print(temp)
+        # Notes.savedDict.pop(name)
+        # Notes.savedDict.update({f'{name}': input("\nВведите новый текст заметки: ")})
+        FileInit.FileWorking.editing(notes)
+        FileInit.FileWorking.saving(FileInit.FileWorking.path, notes)
+        print(f"\nРедактирование завершено!")
 
     def deleteNote():
         name=input("Удалить заметку (введите название): ")
         # Notes.savedDict.pop(name)
         FileInit.FileWorking.deleting(Notes.notes, name)
+        FileInit.FileWorking.saving(FileInit.FileWorking.path, Notes.notes)
         print(f"\nЗаметка {name} успешно удалена!")
 
     def showNotes():
+        print(f"Список заметок: ")
         FileInit.FileWorking.show(Notes.notes)
-        print(f"Список заметок: {Notes.savedDict.items()}")
 
     # def toString(notes):
     #     for line in notes:
