@@ -6,8 +6,9 @@ import FileInit
 
 class Notes(Organizer):
 
-    savedDict = {}
-    createdBuffer = []
+    # savedDict = {}
+    # createdBuffer = []
+    idBank = []
     notes = FileInit.FileWorking.detecting(FileInit.FileWorking.path)
 
     # def showBuffer():
@@ -57,8 +58,31 @@ class Notes(Organizer):
         print(f"\nЗаметка {name} успешно удалена!")
 
     def showNotes():
-        print(f"Список заметок: ")
-        FileInit.FileWorking.show(Notes.notes)
+        flag = True
+        print("Режимы: 1 - показать все заметки,  ")
+        print("        2 - найти заметку по дате: ")
+        choice = int(input("Введите номер режима(1/2): "))
+
+        while (flag):
+            if (choice == 1):
+                print(f"Список заметок: ")
+                FileInit.FileWorking.show(Notes.notes)
+                flag = False
+            if (choice == 2):
+                date = input("Введите дату заметки (в формате yyyy-mm-dd): ")
+                notes = Notes.notes
+                for line in notes:
+                    value = line['Дата создания'].split(" ")[0]
+                    print(value)
+                    if (value == date):
+                        print(f"Заметкa по дате {date}: {line}")
+                flag = False
+            else : 
+                print("Такого режима нет! проверьте правильность введённой информации (доступно 1 или 2)")
+                flag = False
+            
+
+    
 
     # def toString(notes):
     #     for line in notes:

@@ -17,6 +17,7 @@ class TXTNote(TheNote):
         self.msg = msg
         self.author = author
         self.timeOfCreate = datetime.datetime.now()
+        
 
 
     
