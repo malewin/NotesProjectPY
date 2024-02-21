@@ -1,10 +1,13 @@
 import datetime
 import os
+import Notes
+import csv
+import pandas as pd
 
 
 class FileWorking:
 
-    path = '/Users/viktortarkhanov/Desktop/notificationExamPY/Notes.txt'
+    path = '/Users/viktortarkhanov/Desktop/notificationExamPY/Notes.csv'
 
     def save(self):
         with open(FileWorking.path, 'w+') as data:
@@ -13,16 +16,18 @@ class FileWorking:
     def saving(fileSourse, notes):
         with open(fileSourse, 'w+') as file:
             for note in notes:
-                temp = str(note.keys())
-                if temp == "dict_keys(['Название', 'Текст', 'Автор', 'Дата создания'])":
-                    pass
-                else : file.write(f"'Название' : {note['Название']}, 'Текст' : {note['Текст']}, 'Автор' : {note['Автор']}, 'Дата создания' : {note['Дата создания']}\n")
+                df = pd.DataFrame({f"'id' : ['{note['id']}'], 'Название' : ['{note['Название']}'], 'Текст' : ['{note['Текст']}'], 'Автор' : ['{note['Автор']}'], 'Дата создания' : ['{note['Дата создания']}']"})
+                # temp = str(note.keys())
+                # if temp == "dict_keys(['id', 'Название', 'Текст', 'Автор', 'Дата создания'])":
+                #     pass
+                df.to_csv(file)
     
     def detecting(fileSourse):
         notes = []
         if os.path.exists(fileSourse):
             with open(fileSourse, 'r') as file:
-                for line in file:
+                csvReader = csv.reader(file)
+                for line in csvReader:
                     data = line.strip().split(',')
                     # try: data = line.strip().split(',')
                     # finally: print(data)
@@ -30,15 +35,15 @@ class FileWorking:
         return notes
     
     def adding(notes, name, msg, author, date):
-        notes.append({'Название': name, 'Текст': msg, 'Автор': author, 'Дата создания': date})
+        notes.append({'id' : Notes.Notes.idBank[-1], 'Название': name, 'Текст': msg, 'Автор': author, 'Дата создания': date})
 
-    def deleting(notes, name):
-        notes[:] = [note for note in notes if note['Название'].lower() != name.lower()]
+    def deleting(notes, id):
+        notes[:] = [note for note in notes if note['id'] != id]
 
     def show(notes):
         if len(notes) > 0:
             for note in notes:
-                print(f"{note['Название']},{note['Текст']},{note['Автор']},{note['Дата создания']}")
+                print(f"id: {note['id']}, Название: {note['Название']}, Текст: {note['Текст']}, Автор: {note['Автор']}, Дата рождения: {note['Дата создания']}")
         else: print(f"Файл не найден или еще не создан")
 
     def editing(notes):

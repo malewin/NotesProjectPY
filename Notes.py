@@ -25,7 +25,8 @@ class Notes(Organizer):
         # Notes.createdBuffer.append(TXTNote.toString(currentNote))
         temp = (TXTNote.toString(currentNote)).split(",")
         print(temp)
-        FileInit.FileWorking.adding(Notes.notes, temp[0], temp[1], temp[2], temp[3])
+        Notes.idBank.append(temp[0])
+        FileInit.FileWorking.adding(Notes.notes, temp[1], temp[2], temp[3], temp[4])
         # FileInit.FileWorking.saving(FileInit.FileWorking.path, Notes.notes)
         print (Notes.notes)
         print(f"Заметка {name} успешно создана!")
@@ -51,11 +52,11 @@ class Notes(Organizer):
         print(f"\nРедактирование завершено!")
 
     def deleteNote():
-        name=input("Удалить заметку (введите название): ")
+        id=input("Удалить заметку (введите id): ")
         # Notes.savedDict.pop(name)
-        FileInit.FileWorking.deleting(Notes.notes, name)
+        FileInit.FileWorking.deleting(Notes.notes, id)
         FileInit.FileWorking.saving(FileInit.FileWorking.path, Notes.notes)
-        print(f"\nЗаметка {name} успешно удалена!")
+        print(f"\nЗаметка c id = {id} успешно удалена!")
 
     def showNotes():
         flag = True
@@ -77,7 +78,7 @@ class Notes(Organizer):
                     if (value == date):
                         print(f"Заметкa по дате {date}: {line}")
                 flag = False
-            else : 
+            if (choice !=1 & choice!=2): 
                 print("Такого режима нет! проверьте правильность введённой информации (доступно 1 или 2)")
                 flag = False
             
